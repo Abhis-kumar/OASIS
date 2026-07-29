@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="../assets/output.css">
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+
+    <nav class="bg-blue-600  text-white shadow-lg">
+
+        <div class="max-w-9xl mx-auto px-6 py-4 flex justify-between items-center">
+
+            <h1 class="text-2xl font-bold">
+                Auth System
+            </h1>
+
+            <button
+                id="logoutBtn"
+                class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg">
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Dashboard -->
+
+    <div class="max-w-6xl mx-auto mt-10">
+
+        <div class="bg-white rounded-xl shadow-lg p-8">
+
+            <h2 class="text-3xl font-bold text-blue-600 mb-8">
+
+                Welcome 
+
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-6">
+
+                <div class="bg-blue-100 rounded-xl p-6">
+
+                    <h3 class="font-bold text-lg">
+                        Username
+                    </h3>
+
+                    <p
+                        id="username"
+                        class="mt-3 text-gray-700">
+                    </p>
+
+                </div>
+
+                <div class="bg-green-100 rounded-xl p-6">
+
+                    <h3 class="font-bold text-lg">
+                        Email
+                    </h3>
+
+                    <p
+                        id="email"
+                        class="mt-3 text-gray-700">
+                    </p>
+
+                </div>
+
+                <div class="bg-purple-100 rounded-xl p-6">
+
+                    <h3 class="font-bold text-lg">
+                        Joined
+                    </h3>
+
+                    <p
+                        id="joined"
+                        class="mt-3 text-gray-700">
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/dashboard.js"></script>
+
+</body>
+
+</html>

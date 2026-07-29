@@ -1,0 +1,343 @@
+/* ===========================
+   GOOGLE FONTS
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f5f7fa;
+    color:#333;
+    line-height:1.8;
+}
+
+/* ===========================
+   COMMON
+=========================== */
+
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:auto;
+}
+
+section{
+    padding:70px 0;
+}
+
+h1,h2,h3{
+    font-family:'Merriweather',serif;
+}
+
+/* ===========================
+   HERO
+=========================== */
+
+.hero{
+
+    background:linear-gradient(135deg,#0f4c81,#1d74c8);
+
+    color:white;
+
+    text-align:center;
+
+    padding:100px 20px;
+
+}
+
+.hero h1{
+
+    font-size:55px;
+
+    margin-bottom:15px;
+
+}
+
+.tagline{
+
+    font-size:22px;
+
+    opacity:.9;
+
+}
+
+/* ===========================
+   IMAGE SECTION
+=========================== */
+
+.image-section{
+
+    background:white;
+
+    text-align:center;
+
+}
+
+.image-section img{
+
+    width:280px;
+
+    height:280px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:8px solid #0f4c81;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.2);
+
+    transition:.4s;
+
+}
+
+.image-section img:hover{
+
+    transform:scale(1.05);
+
+}
+
+.image-section h2{
+
+    margin-top:20px;
+
+    color:#0f4c81;
+
+}
+
+.image-section p{
+
+    color:gray;
+
+}
+
+/* ===========================
+   BIOGRAPHY
+=========================== */
+
+.biography{
+
+    background:#eef6ff;
+
+}
+
+.biography h2{
+
+    text-align:center;
+
+    color:#0f4c81;
+
+    margin-bottom:35px;
+
+    font-size:36px;
+
+}
+
+.biography p{
+
+    margin-bottom:20px;
+
+    font-size:18px;
+
+    text-align:justify;
+
+}
+
+/* ===========================
+   TIMELINE
+=========================== */
+
+.timeline{
+
+    background:white;
+
+}
+
+.timeline h2{
+
+    text-align:center;
+
+    color:#0f4c81;
+
+    margin-bottom:40px;
+
+    font-size:36px;
+
+}
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:25px;
+
+}
+
+.card{
+
+    background:#f7f9fc;
+
+    padding:25px;
+
+    border-left:6px solid #0f4c81;
+
+    border-radius:10px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+
+    transition:.4s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 12px 25px rgba(0,0,0,.2);
+
+}
+
+.card h3{
+
+    color:#0f4c81;
+
+    margin-bottom:12px;
+
+}
+
+/* ===========================
+   QUOTE
+=========================== */
+
+.quote{
+
+    background:#0f4c81;
+
+    color:white;
+
+}
+
+blockquote{
+
+    max-width:800px;
+
+    margin:auto;
+
+    font-size:28px;
+
+    text-align:center;
+
+    font-style:italic;
+
+    border-left:6px solid gold;
+
+    padding:25px;
+
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
+footer{
+
+    background:#1c1c1c;
+
+    color:white;
+
+    text-align:center;
+
+    padding:25px;
+
+}
+
+footer p{
+
+    margin:8px 0;
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:768px){
+
+.hero{
+
+    padding:70px 20px;
+
+}
+
+.hero h1{
+
+    font-size:38px;
+
+}
+
+.tagline{
+
+    font-size:18px;
+
+}
+
+.image-section img{
+
+    width:220px;
+
+    height:220px;
+
+}
+
+.biography h2,
+.timeline h2{
+
+    font-size:30px;
+
+}
+
+blockquote{
+
+    font-size:22px;
+
+}
+
+}
+
+@media(max-width:500px){
+
+.hero h1{
+
+    font-size:30px;
+
+}
+
+.tagline{
+
+    font-size:16px;
+
+}
+
+.biography p{
+
+    font-size:16px;
+
+}
+
+blockquote{
+
+    font-size:18px;
+
+}
+
+}

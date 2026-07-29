@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+
+    <link rel="stylesheet" href="../assets/output.css">
+</head>
+
+<body class="bg-gradient-to-br from-indigo-100 via-white to-blue-100 min-h-screen flex justify-center items-center">
+
+    <div class="bg-white shadow-2xl rounded-2xl w-full max-w-md p-8">
+
+        <div class="text-center mb-8">
+
+            <h1 class="text-4xl font-bold text-indigo-600">
+                Create Account
+            </h1>
+
+            <p class="text-gray-500 mt-2">
+                Register to continue
+            </p>
+
+        </div>
+
+        <form id="registerForm" class="space-y-5">
+
+            <div>
+                <label class="block mb-2 font-medium">
+                    Username
+                </label>
+
+                <input
+                    id="username"
+                    type="text"
+                    placeholder="Enter Username"
+                    class="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-indigo-500 outline-none">
+            </div>
+
+            <div>
+                <label class="block mb-2 font-medium">
+                    Email
+                </label>
+
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="Enter Email"
+                    class="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-indigo-500 outline-none">
+            </div>
+
+            <div>
+                <label class="block mb-2 font-medium">
+                    Password
+                </label>
+
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="Enter Password"
+                    class="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-indigo-500 outline-none">
+            </div>
+
+            <p id="error" class="text-red-500 text-sm"></p>
+
+            <button
+                class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg transition">
+
+                Register
+
+            </button>
+
+        </form>
+
+        <p class="text-center mt-6">
+
+            Already have an account?
+
+            <a
+                href="./login.html"
+                class="text-indigo-600 font-semibold">
+
+                Login
+
+            </a>
+
+        </p>
+
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/register.js"></script>
+
+</body>
+
+</html>

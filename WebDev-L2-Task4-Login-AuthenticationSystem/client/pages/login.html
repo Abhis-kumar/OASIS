@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="../assets/output.css">
+</head>
+
+<body class="bg-gradient-to-br from-blue-100 via-white to-indigo-100 min-h-screen flex items-center justify-center">
+
+<div class="w-full max-w-md bg-white shadow-2xl rounded-2xl p-8">
+
+    <div class="text-center mb-8">
+
+        <h1 class="text-4xl font-bold text-blue-600">
+            Welcome Back
+        </h1>
+
+        <p class="text-gray-500 mt-2">
+            Login to continue
+        </p>
+
+    </div>
+
+    <form id="loginForm" class="space-y-5">
+
+        <!-- Username / Email -->
+
+        <div>
+
+            <label class="block mb-2 font-medium">
+                Username or Email
+            </label>
+
+            <input
+                id="login"
+                type="text"
+                placeholder="Enter username or email"
+                class="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+
+        </div>
+
+        <!-- Password -->
+
+        <div>
+
+            <label class="block mb-2 font-medium">
+                Password
+            </label>
+
+            <input
+                id="password"
+                type="password"
+                placeholder="Enter password"
+                class="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+
+        </div>
+
+        <!-- Error -->
+
+        <p id="error" class="text-red-500 text-sm"></p>
+
+        <!-- Button -->
+
+        <button
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg transition">
+
+            Login
+
+        </button>
+
+    </form>
+
+    <p class="text-center mt-6">
+
+        Don't have an account?
+
+        <a
+            href="./register.html"
+            class="text-blue-600 font-semibold">
+
+            Register
+
+        </a>
+
+    </p>
+
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/login.js"></script>
+
+</body>
+</html>
