@@ -26,7 +26,7 @@ const server = http.createServer(app);
 // Socket.IO
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", // React frontend
+    origin: "oasis-gxcf-ohvd1l2k5-abhishekbkt2005-9812s-projects.vercel.app", // React frontend
     credentials: true,
   },
 });
@@ -55,7 +55,7 @@ connectDB();
 // Middleware
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "oasis-gxcf-ohvd1l2k5-abhishekbkt2005-9812s-projects.vercel.app",
     credentials: true,
   })
 );
