@@ -23,10 +23,16 @@ const userRoutes = require("./src/routes/userRoutes")
 const app = express();
 const server = http.createServer(app);
 
+
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  process.env.CLIENT_URL_PROD,
+];
+
 // Socket.IO
 const io = new Server(server, {
   cors: {
-    origin: "oasis-gxcf-ohvd1l2k5-abhishekbkt2005-9812s-projects.vercel.app", // React frontend
+    origin: allowedOrigins, // React frontend
     credentials: true,
   },
 });
@@ -55,7 +61,7 @@ connectDB();
 // Middleware
 app.use(
   cors({
-    origin: "oasis-gxcf-ohvd1l2k5-abhishekbkt2005-9812s-projects.vercel.app",
+    origin: allowedOrigins,
     credentials: true,
   })
 );
