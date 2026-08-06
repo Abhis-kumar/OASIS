@@ -32,8 +32,9 @@ const allowedOrigins = [
 // Socket.IO
 const io = new Server(server, {
   cors: {
-    origin: allowedOrigins, // React frontend
+    origin: "http://localhost:5173",
     credentials: true,
+    methods: ["GET", "POST"],
   },
 });
 
@@ -61,7 +62,7 @@ connectDB();
 // Middleware
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );
