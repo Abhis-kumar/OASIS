@@ -31,13 +31,10 @@ connectDB();
 // ALLOWED FRONTEND ORIGINS
 // ===============================
 const allowedOrigins = [
-  "http://localhost:5173",
-  "https://golden-syrniki-284128.netlify.app",
-  "https://oasis-8nsq.vercel.app",
 
-  // Optional: values from Render/Railway environment variables
-  process.env.CLIENT_URL,
-  process.env.CLIENT_URL_PROD,
+  "https://golden-syrniki-284128.netlify.app"
+
+
 ].filter(Boolean);
 
 console.log("Allowed CORS Origins:", allowedOrigins);
