@@ -22,21 +22,34 @@ const userRoutes = require("./src/routes/userRoutes");
 const app = express();
 const server = http.createServer(app);
 
-// Database
+// ===============================
+// DATABASE
+// ===============================
 connectDB();
 
-// Allowed Origins
+// ===============================
+// ALLOWED FRONTEND ORIGINS
+// ===============================
 const allowedOrigins = [
   "http://localhost:5173",
+  "https://golden-syrniki-284128.netlify.app",
+  "https://oasis-8nsq.vercel.app",
+
+  // Optional: values from Render/Railway environment variables
   process.env.CLIENT_URL,
   process.env.CLIENT_URL_PROD,
 ].filter(Boolean);
 
-// Middleware
+console.log("Allowed CORS Origins:", allowedOrigins);
+
+// ===============================
+// CORS
+// ===============================
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow Postman/server-to-server requests
+      // Allow requests without an origin
+      // (Postman, server-to-server, etc.)
       if (!origin) {
         return callback(null, true);
       }
@@ -45,18 +58,38 @@ app.use(
         return callback(null, true);
       }
 
+      console.log("❌ CORS blocked:", origin);
+
       return callback(new Error(`CORS Error: ${origin} is not allowed`));
     },
+
     credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+
+    methods: [
+      "GET",
+      "POST",
+      "PUT",
+      "PATCH",
+      "DELETE",
+      "OPTIONS",
+    ],
+
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+    ],
   })
 );
 
+// ===============================
+// BODY PARSER
+// ===============================
 app.use(express.json());
 app.use(cookieParser());
 
-// Socket.IO
+// ===============================
+// SOCKET.IO
+// ===============================
 const io = new Server(server, {
   cors: {
     origin: allowedOrigins,
@@ -68,7 +101,7 @@ const io = new Server(server, {
 initializeSocket(io);
 
 io.on("connection", (socket) => {
-  console.log("User Connected:", socket.id);
+  console.log("✅ User Connected:", socket.id);
 
   socket.on("join", (userId) => {
     socket.join(userId);
@@ -76,11 +109,13 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    console.log("User Disconnected:", socket.id);
+    console.log("❌ User Disconnected:", socket.id);
   });
 });
 
-// Home Route
+// ===============================
+// HOME ROUTE
+// ===============================
 app.get("/", (req, res) => {
   res.status(200).json({
     success: true,
@@ -88,7 +123,9 @@ app.get("/", (req, res) => {
   });
 });
 
-// API Routes
+// ===============================
+// API ROUTES
+// ===============================
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/pizzas", pizzaRoutes);
@@ -98,7 +135,9 @@ app.use("/api/payment", paymentRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/otp", otpRoutes);
 
-// 404 Route
+// ===============================
+// 404 ROUTE
+// ===============================
 app.use((req, res) => {
   res.status(404).json({
     success: false,
@@ -106,9 +145,11 @@ app.use((req, res) => {
   });
 });
 
-// Error Handler
+// ===============================
+// ERROR HANDLER
+// ===============================
 app.use((err, req, res, next) => {
-  console.error(err);
+  console.error("❌ Server Error:", err);
 
   res.status(500).json({
     success: false,
@@ -116,8 +157,11 @@ app.use((err, req, res, next) => {
   });
 });
 
+// ===============================
+// START SERVER
+// ===============================
 const PORT = process.env.PORT || 5000;
 
-server.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
