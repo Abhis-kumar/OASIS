@@ -6,7 +6,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import ForgotPassword from "../pages/ForgotPassword";
 import ResetPassword from "../pages/ResetPassword";
-import VerifyEmail from "../pages/VerifyEmail";
+
 import Menu from "../pages/Menu";
 import BuildPizza from "../pages/BuildPizza";
 import Cart from "../pages/Cart";
@@ -37,7 +37,7 @@ function AppRoutes() {
       <Route path="/register" element={<Register />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password/:token" element={<ResetPassword />} />
-      <Route path="/verify/:token" element={<VerifyEmail />} />
+
 
       {/* Customer Protected Routes */}
       <Route element={<ProtectedRoute />}>

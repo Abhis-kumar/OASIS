@@ -38,64 +38,27 @@ const register = async (req, res) => {
       name,
       email,
       password: hashedPassword,
-    });
-
-    // Generate verification token
-    const verificationToken = crypto.randomBytes(32).toString("hex");
-
-    user.verificationToken = verificationToken;
-    user.verificationTokenExpire =
-      Date.now() + 24 * 60 * 60 * 1000; // 24 hours
-
-    await user.save();
-
-    // Verification URL
-    const verifyUrl = `${process.env.CLIENT_URL}/verify/${verificationToken}`;
-
-    // Email Template
-    const message = `
-      <h2>Welcome to Pizza Delivery 🍕</h2>
-
-      <p>Thank you for registering.</p>
-
-      <p>Please click the button below to verify your email.</p>
-
-      <a href="${verifyUrl}"
-         style="
-            background:#ff5722;
-            color:white;
-            padding:10px 20px;
-            text-decoration:none;
-            border-radius:5px;
-         ">
-         Verify Email
-      </a>
-
-      <p>This link expires in 24 hours.</p>
-    `;
-
-    // Send Email
-    await sendEmail({
-      email: user.email,
-      subject: "Verify Your Email",
-      message,
+      isVerified: true,
     });
 
     return res.status(201).json({
       success: true,
-      message:
-        "Registration successful. Please verify your email before logging in.",
+      message: "Registration successful. You can now login.",
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
     });
 
   } catch (error) {
-
-    console.log(error);
+    console.error("Register Error:", error);
 
     return res.status(500).json({
       success: false,
       message: "Internal Server Error",
     });
-
   }
 };
 
@@ -104,9 +67,9 @@ const register = async (req, res) => {
 // ============================
 const login = async (req, res) => {
   try {
-
     const { email, password } = req.body;
 
+    // Validation
     if (!email || !password) {
       return res.status(400).json({
         success: false,
@@ -121,14 +84,6 @@ const login = async (req, res) => {
       return res.status(401).json({
         success: false,
         message: "Invalid Email or Password",
-      });
-    }
-
-    // Check email verification
-    if (!user.isVerified) {
-      return res.status(401).json({
-        success: false,
-        message: "Please verify your email first.",
       });
     }
 
@@ -158,61 +113,19 @@ const login = async (req, res) => {
     });
 
   } catch (error) {
-
-    console.log(error);
+    console.error("Login Error:", error);
 
     return res.status(500).json({
       success: false,
       message: "Internal Server Error",
     });
-
   }
 };
 
 // ============================
 // Verify Email
 // ============================
-const verifyEmail = async (req, res) => {
-  try {
 
-    const { token } = req.params;
-
-    // Find user with valid token
-    const user = await User.findOne({
-      verificationToken: token,
-      verificationTokenExpire: { $gt: Date.now() },
-    });
-
-    if (!user) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid or expired verification link.",
-      });
-    }
-
-    // Verify account
-    user.isVerified = true;
-    user.verificationToken = undefined;
-    user.verificationTokenExpire = undefined;
-
-    await user.save();
-
-    return res.status(200).json({
-      success: true,
-      message: "Email verified successfully. You can now login.",
-    });
-
-  } catch (error) {
-
-    console.log(error);
-
-    return res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-    });
-
-  }
-};
 
 
 // ============================
