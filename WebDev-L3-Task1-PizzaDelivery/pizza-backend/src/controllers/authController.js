@@ -34,6 +34,7 @@ const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create user
+    // Email verification is removed
     const user = await User.create({
       name,
       email,
@@ -51,7 +52,6 @@ const register = async (req, res) => {
         role: user.role,
       },
     });
-
   } catch (error) {
     console.error("Register Error:", error);
 
@@ -111,7 +111,6 @@ const login = async (req, res) => {
         role: user.role,
       },
     });
-
   } catch (error) {
     console.error("Login Error:", error);
 
@@ -123,29 +122,20 @@ const login = async (req, res) => {
 };
 
 // ============================
-// Verify Email
-// ============================
-
-
-
-// ============================
 // Get Profile
 // ============================
 const getProfile = async (req, res) => {
-
   return res.status(200).json({
     success: true,
     user: req.user,
   });
-
 };
 
-//======================
-// forget password
-//=====================
+// ============================
+// Forgot Password
+// ============================
 const forgotPassword = async (req, res) => {
   try {
-
     const { email } = req.body;
 
     if (!email) {
@@ -176,21 +166,31 @@ const forgotPassword = async (req, res) => {
     // Save Hashed Token
     user.resetPasswordToken = hashedToken;
 
-    user.resetPasswordExpire =
-      Date.now() + 15 * 60 * 1000;
+    user.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
 
     await user.save();
 
     // Frontend URL
+    const frontendUrl =
+      process.env.CLIENT_URL_PROD || process.env.CLIENT_URL;
+
     const resetUrl =
-      `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+      `${frontendUrl}/reset-password/${resetToken}`;
 
     const message = `
       <h2>Reset Your Password</h2>
 
       <p>Click below to reset your password.</p>
 
-      <a href="${resetUrl}">
+      <a href="${resetUrl}"
+         style="
+           background:#ff5722;
+           color:white;
+           padding:10px 20px;
+           text-decoration:none;
+           border-radius:5px;
+           display:inline-block;
+         ">
         Reset Password
       </a>
 
@@ -203,30 +203,25 @@ const forgotPassword = async (req, res) => {
       message,
     });
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Password reset email sent successfully.",
     });
-
   } catch (error) {
+    console.error("Forgot Password Error:", error);
 
-    console.log(error);
-
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Internal Server Error",
     });
-
   }
 };
 
-//=====================
-//resetPassword
-//====================
-
+// ============================
+// Reset Password
+// ============================
 const resetPassword = async (req, res) => {
   try {
-
     const { token } = req.params;
     const { password } = req.body;
 
@@ -237,13 +232,13 @@ const resetPassword = async (req, res) => {
       });
     }
 
-    // Hash the token received from URL
+    // Hash token received from URL
     const hashedToken = crypto
       .createHash("sha256")
       .update(token)
       .digest("hex");
 
-    // Find user with valid token
+    // Find user
     const user = await User.findOne({
       resetPasswordToken: hashedToken,
       resetPasswordExpire: { $gt: Date.now() },
@@ -272,22 +267,21 @@ const resetPassword = async (req, res) => {
       success: true,
       message: "Password reset successful. Please login.",
     });
-
   } catch (error) {
-
-    console.log(error);
+    console.error("Reset Password Error:", error);
 
     return res.status(500).json({
       success: false,
       message: "Internal Server Error",
     });
-
   }
 };
 
+// ============================
+// Export
+// ============================
 module.exports = {
   register,
-  verifyEmail,
   login,
   forgotPassword,
   resetPassword,
